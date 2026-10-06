@@ -230,12 +230,18 @@ swapped in one file each once the client replies.
 
 | # | Item | Where | Status |
 | --- | --- | --- | --- |
-| 1 | Real domain (currently Vercel subdomain) | `site.ts` → `url` | placeholder |
-| 2 | Stats: years, clients, looks, rating | `site.ts` → `stats` | dummy |
-| 3 | Real testimonials | `testimonials.ts` | dummy |
-| 4 | Service area / districts covered | `site.ts` → `serviceArea` | dummy |
-| 5 | Business hours | `site.ts` → `hours` | dummy |
-| 6 | Logo artwork | `layout/Header`, `Footer` | text lockup |
-| 7 | Wisuda + commercial photos | `portfolio.ts` | missing |
+| 1 | Custom domain | `site.ts` → `url` | live on `https://muafabycion.vercel.app` |
+| 2 | Stats: years, clients, looks, rating | `site.ts` → `stats` | awaiting client |
+| 3 | Real testimonials | `testimonials.ts` | awaiting client |
+| 4 | Service one-liners | `services.ts` | written by us, needs client sign-off |
+| 5 | Logo artwork | `layout/Header`, `Footer` | text lockup, client declined artwork |
+| 6 | Wisuda + commercial photos | `portfolio.ts` | not supplied |
+
+Item 4 is the one worth chasing first: those descriptions are promises the
+client makes to their own customers ("tahan seharian", "disesuaikan dengan warna
+kulit"), so they should agree to them rather than inherit our wording.
+
+Stats and testimonials render nothing until their arrays are populated, and the
+client asked us not to publish unconfirmed figures in the meantime.
 
 Each placeholder is tagged with a `// TODO(client):` comment so nothing is missed in review.
