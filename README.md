@@ -73,6 +73,10 @@ reaches 2.9:1 contrast there. `gold` is the accessible accent for light surfaces
 - `development` — daily work. Everything lands here first.
 - `main` — production. Only receives merges from `development` on release.
 
+A GitHub Actions workflow (`.github/workflows/ci.yml`) runs lint, typecheck and
+a production build on every push and pull request to either branch, so a broken
+change can't reach `main` unseen.
+
 ## Deploying to Vercel
 
 1. Push this repo to GitHub.
