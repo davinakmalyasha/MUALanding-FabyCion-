@@ -1,0 +1,11 @@
+# Normalise line endings to LF in the repository, and check out LF everywhere.
+# Keeps diffs stable between Windows dev machines and the Linux Vercel build.
+* text=auto eol=lf
+
+# Images and icons must never be touched.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.ico binary
+*.webp binary
+*.avif binary

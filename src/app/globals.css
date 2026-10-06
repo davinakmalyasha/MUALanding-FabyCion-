@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-ivory: #faf7f2;
+  --color-ivory-deep: #f2ece1;
+  --color-sand: #e6d8cd;
+
+  /* Ink */
+  --color-charcoal: #1b1a18;
+  --color-charcoal-soft: #2b2926;
+  --color-muted: #57524c;
+
+  /* Accent */
+  /* champagne = decorative only (rules, borders, dots) + text on dark.
+     gold = accent text on light. b08d4f on ivory is only 2.9:1, which fails
+     AA even for large text, so it is never used for copy. */
+  --color-champagne: #b08d4f;
+  --color-champagne-soft: #ddc79c;
+  --color-champagne-mist: #f0e7d5;
+  --color-gold: #7d5f28;
+
+  /* Type */
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* Rhythm */
+  --spacing-section: 6rem;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 28s linear infinite;
+}
+
+@media (min-width: 768px) {
+  @theme {
+    --spacing-section: 8.5rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Anchor targets clear the fixed header. */
+  section[id] {
+    scroll-margin-top: calc(var(--header-height, 72px) + 1.5rem);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne);
+    color: var(--color-charcoal);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide the horizontal scrollbar on the mobile nav panel. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
