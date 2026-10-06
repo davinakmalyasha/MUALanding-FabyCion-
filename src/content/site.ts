@@ -1,8 +1,22 @@
 import type { Certification, NavLink, SocialLink, Stat } from "@/types";
 
+const WHATSAPP_NUMBER = "6285217787182";
+const INSTAGRAM_HANDLE = "fabycions";
+const EMAIL = "Fabycion@gmail.com";
+
+export const whatsappMessage =
+  "Halo Faby Cion, saya mau tanya-tanya soal jasa makeup.";
+
+/** Builds a wa.me deep link with a pre-filled message. */
+export function waLink(message: string = whatsappMessage): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 /**
  * Single source of truth for brand, contact details and SEO defaults.
- * TODO(client): confirm the production domain once the Vercel subdomain is claimed.
+ *
+ * TODO(client): confirm the production domain. NEXT_PUBLIC_SITE_URL is set in
+ * the Vercel project so the URL can change without a code deploy.
  */
 export const site = {
   name: "Faby Cion",
@@ -13,34 +27,22 @@ export const site = {
   description:
     "Faby Cion adalah jasa makeup artist profesional bersertifikat di Jakarta. Melayani makeup pengantin, prewedding, bridesmaid, wisuda, party, hingga commercial TV & digital.",
 
-  /**
-   * TODO(client): swap for the real domain once a custom domain is live.
-   * Used for canonical URLs, sitemap and Open Graph tags.
-   */
-  url: "https://fabycion-mua.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fabycion-mua.vercel.app",
 
   contact: {
-    // International format, digits only — used to build wa.me links.
-    whatsapp: "6285217787182",
+    /** International format, digits only — used to build wa.me links. */
+    whatsapp: WHATSAPP_NUMBER,
     phoneDisplay: "0852-1778-7182",
     phoneHref: "+6285217787182",
-    email: "Fabycion@gmail.com",
-    instagramHandle: "fabycions",
+    email: EMAIL,
+    instagramHandle: INSTAGRAM_HANDLE,
+    instagramUrl: `https://www.instagram.com/${INSTAGRAM_HANDLE}/`,
   },
 
   socials: [
-    {
-      label: "Instagram",
-      href: "https://www.instagram.com/fabycions/",
-    },
-    {
-      label: "WhatsApp",
-      href: "https://wa.me/6285217787182",
-    },
-    {
-      label: "Email",
-      href: "mailto:Fabycion@gmail.com",
-    },
+    { label: "Instagram", href: `https://www.instagram.com/${INSTAGRAM_HANDLE}/` },
+    { label: "WhatsApp", href: waLink() },
+    { label: "Email", href: `mailto:${EMAIL}` },
   ] satisfies SocialLink[],
 
   certifications: [
@@ -62,7 +64,3 @@ export const site = {
     { label: "FAQ", href: "#faq" },
   ] satisfies NavLink[],
 } as const;
-
-/** Pre-filled WhatsApp message so enquiries arrive pre-qualified. */
-export const whatsappMessage =
-  "Halo Faby Cion, saya mau tanya-tanya soal jasa makeup.";

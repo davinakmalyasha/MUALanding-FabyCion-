@@ -58,11 +58,19 @@ export function MobileNav({ open, onClose, links, openerRef }: MobileNavProps) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
 
+  const wasOpen = useRef(false);
+
   useEffect(() => {
-    if (open) return;
-    // Hand focus back to the burger rather than the panel's own close button,
-    // which is inside the now-inert container and would swallow focus.
-    openerRef.current?.focus();
+    if (open) {
+      wasOpen.current = true;
+      return;
+    }
+    // Restore focus only on a genuine close, never on first mount. Otherwise
+    // the burger would grab focus as soon as the page loads.
+    if (wasOpen.current) {
+      wasOpen.current = false;
+      openerRef.current?.focus();
+    }
   }, [open, openerRef]);
 
   return (
@@ -116,9 +124,9 @@ export function MobileNav({ open, onClose, links, openerRef }: MobileNavProps) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className="flex items-baseline gap-4 py-4 text-charcoal transition-colors hover:text-champagne"
+                  className="flex items-baseline gap-4 py-4 text-charcoal transition-colors hover:text-gold"
                 >
-                  <span className="text-[0.65rem] tracking-[0.2em] text-champagne">
+                  <span className="text-[0.65rem] tracking-[0.2em] text-gold">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="font-display text-2xl">{link.label}</span>

@@ -45,7 +45,7 @@ export function Header() {
         <Container className="flex h-full items-center justify-between gap-6">
           <a
             href="#top"
-            className="font-display text-[0.95rem] leading-none tracking-[0.24em] uppercase transition-opacity hover:opacity-70"
+            className="-my-2 py-2 font-display text-[0.95rem] leading-none tracking-[0.24em] uppercase transition-opacity hover:opacity-70"
           >
             {site.brandLine}
           </a>
@@ -81,14 +81,28 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Wrapped because Button always sets `inline-flex`, which would
                 otherwise win over a `hidden` utility on the same element. */}
             <span className="hidden sm:inline-flex">
-              <Button href={whatsappUrl()} external size="sm" variant="primary">
+              <Button href={whatsappUrl()} external size="md" variant="primary">
                 Booking
               </Button>
             </span>
+
+            {/* WhatsApp is the primary channel, so phones get a direct,
+                always-visible shortcut instead of having to open the menu. */}
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Booking via WhatsApp"
+              className="grid h-11 w-11 place-items-center rounded-full bg-[#25d366] text-white transition-colors hover:bg-[#1eb958] sm:hidden"
+            >
+              <span className="h-5 w-5">
+                <Icon name="whatsapp" />
+              </span>
+            </a>
 
             <button
               ref={burgerRef}

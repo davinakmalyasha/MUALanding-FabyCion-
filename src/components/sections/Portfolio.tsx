@@ -61,7 +61,7 @@ export function Portfolio() {
                   onClick={() => setFilter(category.id)}
                   aria-pressed={isActive}
                   className={cn(
-                    "h-9 shrink-0 rounded-full border px-4 text-[0.8rem] transition-colors duration-300",
+                    "h-10 shrink-0 rounded-full border px-4 text-[0.8rem] transition-colors duration-300",
                     isActive
                       ? "border-charcoal bg-charcoal text-ivory"
                       : "border-charcoal/20 text-muted hover:border-charcoal/50 hover:text-charcoal",

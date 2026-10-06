@@ -52,7 +52,7 @@ export function Footer() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-charcoal/85 transition-colors hover:text-champagne"
+                  className="inline-block py-1.5 text-sm text-charcoal/85 transition-colors hover:text-gold"
                 >
                   {link.label}
                 </a>
@@ -71,7 +71,7 @@ export function Footer() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noreferrer"
-                className="text-charcoal/85 transition-colors hover:text-champagne"
+                className="text-charcoal/85 transition-colors hover:text-gold"
               >
                 WhatsApp {site.contact.phoneDisplay}
               </a>
@@ -79,7 +79,7 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${site.contact.email}`}
-                className="text-charcoal/85 transition-colors hover:text-champagne"
+                className="text-charcoal/85 transition-colors hover:text-gold"
               >
                 {site.contact.email}
               </a>
@@ -89,7 +89,7 @@ export function Footer() {
                 href={`https://www.instagram.com/${site.contact.instagramHandle}/`}
                 target="_blank"
                 rel="noreferrer"
-                className="text-charcoal/85 transition-colors hover:text-champagne"
+                className="text-charcoal/85 transition-colors hover:text-gold"
               >
                 @{site.contact.instagramHandle}
               </a>

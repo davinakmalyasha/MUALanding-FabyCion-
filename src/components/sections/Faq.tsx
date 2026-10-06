@@ -56,7 +56,7 @@ export function Faq() {
 
                           <span
                             aria-hidden
-                            className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-charcoal/20 text-charcoal"
+                            className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full border border-charcoal/20 text-charcoal"
                           >
                             <span className="relative h-3 w-3">
                               <Icon

@@ -1,13 +1,8 @@
-import { site, whatsappMessage } from "@/content/site";
+import { waLink } from "@/content/site";
 
-/**
- * Builds a wa.me deep link with a pre-filled message so enquiries arrive
- * already scoped to the section the visitor clicked from.
- */
-export function whatsappUrl(message: string = whatsappMessage): string {
-  return `https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(message)}`;
-}
+export { waLink as whatsappUrl };
 
+/** Scopes the pre-filled message to the section the visitor clicked from. */
 export function whatsappUrlFor(topic: string): string {
-  return whatsappUrl(`Halo Faby Cion, saya mau tanya soal ${topic}.`);
+  return waLink(`Halo Faby Cion, saya mau tanya soal ${topic}.`);
 }
