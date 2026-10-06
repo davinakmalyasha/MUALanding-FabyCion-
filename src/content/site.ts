@@ -27,7 +27,11 @@ export const site = {
   description:
     "Faby Cion adalah jasa makeup artist profesional bersertifikat di Jakarta. Melayani makeup pengantin, prewedding, bridesmaid, wisuda, party, hingga commercial TV & digital.",
 
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://fabycion-mua.vercel.app",
+  /**
+   * Drives canonical URLs, og:url, the sitemap and robots.txt.
+   * Set NEXT_PUBLIC_SITE_URL in Vercel to override without a code deploy.
+   */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://muafabycion.vercel.app",
 
   contact: {
     /** International format, digits only — used to build wa.me links. */

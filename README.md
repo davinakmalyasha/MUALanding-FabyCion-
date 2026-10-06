@@ -81,8 +81,18 @@ change can't reach `main` unseen.
 
 1. Push this repo to GitHub.
 2. In Vercel, **Add New → Project** and import the repo.
-3. Leave the framework preset as Next.js; no environment variables are required.
+3. Leave the framework preset as Next.js.
 4. Deploy. `main` becomes production, `development` gets a preview URL.
-5. Settings → Domains → claim the free `.vercel.app` subdomain.
-6. Update `site.url` in `src/content/site.ts` to match, so canonical URLs, the
-   sitemap and Open Graph tags resolve correctly.
+5. Settings → Domains → set the domain you want.
+6. Settings → Environment Variables → set `NEXT_PUBLIC_SITE_URL` to that domain,
+   so canonical URLs, the sitemap, robots.txt and the Open Graph card all resolve
+   to the real host. This is the only variable the site uses.
+
+Two things to check on a fresh project, both of which will otherwise look like
+"the site is broken" to a visitor:
+
+- **Settings → Deployment Protection → Vercel Authentication → Disabled.**
+  While enabled, every visit redirects to a Vercel login page.
+- `NEXT_PUBLIC_SITE_URL` must match the live domain. If it doesn't, the page
+  still renders but `og:image` and `canonical` point at the wrong host, so link
+  previews on WhatsApp and Instagram come up blank.
