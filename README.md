@@ -68,6 +68,55 @@ Declared once in `src/app/globals.css` under `@theme`:
 `champagne` is deliberately **not** used for copy on light backgrounds — it only
 reaches 2.9:1 contrast there. `gold` is the accessible accent for light surfaces.
 
+## Icons
+
+`src/app/icon.svg` is the source of truth: a geometric `F` monogram built from
+rectangles, so it renders identically everywhere without depending on a font
+being installed. It is the App Router's icon route, and Next emits the `<link>`
+tags for it automatically.
+
+`favicon.ico` (16/32/48) and `apple-icon.png` (180) are generated from that same
+SVG. If the monogram changes, regenerate them rather than hand-editing, or the
+three will drift.
+
+There is no `.ico` fallback beyond the generated file. Browsers without SVG icon
+support fall back to `favicon.ico`, which is why it exists.
+
+## Security headers and caching
+
+Both live in `next.config.ts`.
+
+**Headers.** `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options`,
+`Referrer-Policy` and `Permissions-Policy` are applied to every route, and
+`poweredByHeader` is off.
+
+The CSP allows `'unsafe-inline'` on `script-src` and `style-src`. That is a real
+weakening, and it is deliberate:
+
+- App Router emits inline bootstrap scripts for hydration. The clean fix is
+  per-request nonces via middleware, but that forces dynamic rendering and costs
+  this site its fully static prerender — a bad trade for a landing page.
+- Several components set inline `style` attributes, which `style-src` blocks.
+
+Everything else is enforced: `object-src 'none'`, `base-uri 'self'`,
+`form-action 'self'`, `frame-ancestors 'none'`, `upgrade-insecure-requests`.
+
+**Caching.** Fingerprinted assets under `/_next/static` already get
+`max-age=31536000, immutable` from Next and are left alone. The security rule
+matches those routes too, so it must never set `Cache-Control` or it would
+override that.
+
+Two rules are added:
+
+| Route | Cache-Control | Why |
+| --- | --- | --- |
+| `/` | `max-age=0, s-maxage=3600, stale-while-revalidate=86400` | Short edge TTL so a content edit reaches visitors quickly |
+| `/images/*` | `max-age=86400, stale-while-revalidate=604800` | Client photography |
+
+`/images/*` is deliberately **not** `immutable`. Those filenames are not
+fingerprinted and the client is expected to replace `formal-01/02` and the rate
+card, so a long-lived browser cache would keep serving the old files.
+
 ## Branching
 
 - `development` — daily work. Everything lands here first.
